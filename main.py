@@ -31,6 +31,10 @@ TEXT = (
 
 
 def main() -> None:
+    # Gate range, counted as Unicode code points, mirroring RULES.txt:
+    # /output/entry.txt must be 1 to 280 characters, not only whitespace.
+    if not 1 <= len(TEXT) <= 280 or not TEXT.strip():
+        raise SystemExit("entry text outside the 1-280 character gate")
     outdir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, "entry.txt")
